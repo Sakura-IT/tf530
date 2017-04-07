@@ -1,6 +1,6 @@
 # TF530 (Archived)
 
-** I am no longer working on this. Do not ask for support.
+## I am no longer working on this. Do not ask for support.
 
 This repository contains all the files needed to produce a copy of my accelerator board.
 
