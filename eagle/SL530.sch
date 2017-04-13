@@ -4270,7 +4270,7 @@ Source: http://us.st.com/stonline/products/literature/ds/7995.pdf</description>
 <wire x1="4.9" y1="4.4" x2="4.9" y2="-4.4" width="0.2" layer="51"/>
 <wire x1="-4.9" y1="4.4" x2="-4.4" y2="4.9" width="0.2" layer="51"/>
 <wire x1="-4.4" y1="4.9" x2="4.4" y2="4.9" width="0.2" layer="51"/>
-<circle x="-4" y="3.75" radius="0.5" width="0" layer="51"/>
+<circle x="-4" y="3.75" radius="0.5" width="0" layer="25"/>
 <smd name="1" x="-5.5" y="3.75" dx="1.5" dy="0.3" layer="1"/>
 <smd name="2" x="-5.5" y="3.25" dx="1.5" dy="0.3" layer="1"/>
 <smd name="3" x="-5.5" y="2.75" dx="1.5" dy="0.3" layer="1"/>
