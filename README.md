@@ -1,6 +1,8 @@
-# TF530
+# TF530 (Archived)
 
-** WARNING THIS IS BETA AT THE MOMENT
+## I am no longer working on this. Do not ask for support. 
+
+I have spend 2000hrs working on this project and many people hate me for this. So it is up to the Amiga Community to make this board from now on. 
 
 This repository contains all the files needed to produce a copy of my accelerator board.
 
@@ -25,12 +27,6 @@ This board is now in Beta. It may not work in all circumstances but it has been 
 
 I have only verified the HD interface with Compact Flash cards.
 I have verified this board boots on Amiga 500 Rev 5, 6a, 8.1a
-
-To buy 10 blank copies of the revision 2 board follow the following link.
-
-http://dirtypcbs.com/store/designer/details/12476/1330/tf530-rev2b-zip
-
-(Terrible Fire gets a $2 "cut" for each order... in reality this is a downpayment on future prototype board orders).
 
 I accept no responsibiltiy for any damage to any equipment that results from the use of this board. IT IS ENTIRELY AT YOUR OWN RISK!
 
