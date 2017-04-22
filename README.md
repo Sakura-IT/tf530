@@ -1,14 +1,12 @@
-# TF530 (Archived)
+# TF530 Revision 3
 
-## I am no longer working on this. Do not ask for support. 
-
-I have spend 2000hrs working on this project and many people hate me for this. So it is up to the Amiga Community to make this board from now on. 
+WARNING: I have just committed revision 3 of the board. I havent verified this yet.
 
 This repository contains all the files needed to produce a copy of my accelerator board.
 
 The CPLD Required is a XC9572XL-10VQ64
 
-Everything in this repository is released under the GNU GPLv2. You may create or base commercial PCBs from the work in this repository but you must make the sources for all derivative work available. 
+Everything in this repository is released under the GNU GPLv2. You may create or base commercial PCBs from the work in this repository but you must make the sources for all derivative work available. I have noticed some forks have removed copyright notices. This is a breach of the GPL. 
 
 ## Firmware / Requirements
 
@@ -32,9 +30,9 @@ I accept no responsibiltiy for any damage to any equipment that results from the
 
 ## Installation
 
-Installation is exactly the same as the Kipper2k A508. Refer to http://www.kipper2k.com/a500fastmem.html
+As of Revision 3 installation no longer needs the OVR and INT2 signals connected to the Amiga motherboard. The headers remain on the TF530 for testing but do not need to be connected although it should make little difference if they are connected. Well behaved Autoconfig devices will work alongside the TF530. The autoconfig space asserts the internal OVR signal when there are PICs remaining to be configured. After which the autoconfig will probe the standard bus. This revision should work on the A2000 (untested). 
 
-You need to connect the OVR and INT2 signals to the A500 header port. 
+IPL0 has not been routed because we only ever need to assert INT2 and/or INT6. 
 
 ## What does the board look like
 
