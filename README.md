@@ -1,8 +1,6 @@
-# TF530 (Archived)
+# TF530 Revision 3
 
-## I am no longer working on this. Do not ask for support. 
-
-I have spend 2000hrs working on this project and many people hate me for this. So it is up to the Amiga Community to make this board from now on. 
+WARNING: I have just committed revision 3 of the board. I havent verified this yet.
 
 This repository contains all the files needed to produce a copy of my accelerator board.
 
