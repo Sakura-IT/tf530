@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE eagle SYSTEM "eagle.dtd">
-<eagle version="7.7.0">
+<eagle version="8.1.1">
 <drawing>
 <settings>
 <setting alwaysvectorfont="no"/>
@@ -4846,7 +4846,8 @@ Source: http://us.st.com/stonline/products/literature/ds/7995.pdf</description>
 <part name="SPIPORT" library="pinhead" deviceset="PINHD-2X6" device="" value="SPI PORT"/>
 <part name="R1" library="microbuilder" deviceset="RESISTOR" device="1206" value="47K"/>
 <part name="R2" library="microbuilder" deviceset="RESISTOR" device="1206" value="47K"/>
-<part name="AUXPINS" library="SparkFun-Retired" deviceset="JUMPER-2" device="PTH" value="AUXPINS"/>
+<part name="C14" library="microbuilder" deviceset="CAP_CERAMIC" device="1206" value="10uF"/>
+<part name="C15" library="microbuilder" deviceset="CAP_CERAMIC" device="1206" value="10uF"/>
 </parts>
 <sheets>
 <sheet>
@@ -4881,9 +4882,11 @@ Source: http://us.st.com/stonline/products/literature/ds/7995.pdf</description>
 <instance part="C4" gate="G$1" x="454.66" y="195.58"/>
 <instance part="R1" gate="G$1" x="467.36" y="73.66" rot="R180"/>
 <instance part="R2" gate="G$1" x="467.36" y="66.04" rot="R180"/>
+<instance part="C14" gate="G$1" x="535.94" y="195.58"/>
+<instance part="C15" gate="G$1" x="543.56" y="195.58"/>
 </instances>
 <busses>
-<bus name="VCC33,VCC,GND,CLK7M,A[0..31],D[0..31],IPL[0..2],FC[0..2],DSACK[0..1],BR,BGACK,R/W20,R/W,CLKCPU,AS20,DS20,BG20,AVEC,SIZ[0..1],DBEN,BERR,RESET,HALT,BG,VPA,VMA,E,AS,UDS,LDS,DTACK,CPCS,CPSENSE,CDIS,MMUDIS,IOR,IOW,INT2,IDECS[0..1],IDELED,IDEWAIT,IDEINT,RAMOE,RAMCS[0..3],INTSIG[0..4],TCK,TMS,TDI,TDO,TDINT,OVL,CIIN,CIIOUT,CBREQ,CBACK,STERM,STATUS,REFILL,SPI_MOSI,SPI_MISO,SPI_CLK,SPI_CS[0..1],UNDECIDED">
+<bus name="VCC33,VCC,GND,CLK7M,A[0..31],D[0..31],IPL[0..2],FC[0..2],DSACK[0..1],BR,BGACK,R/W20,R/W,CLKCPU,AS20,DS20,BG20,AVEC,SIZ[0..1],DBEN,BERR,RESET,HALT,BG,VPA,VMA,E,AS,UDS,LDS,DTACK,CPCS,CPSENSE,CDIS,MMUDIS,IOR,IOW,INT2,IDECS[0..1],IDELED,IDEWAIT,IDEINT,RAMOE,RAMCS[0..3],INTSIG[0..4],TCK,TMS,TDI,TDO,TDINT,OVL,CIIN,CIIOUT,CBREQ,CBACK,STERM,STATUS,REFILL,SPI_MOSI,SPI_MISO,SPI_CLK,SPI_CS[0..1],SPARE">
 <segment>
 <wire x1="210.82" y1="-5.08" x2="210.82" y2="218.44" width="0.762" layer="92"/>
 <wire x1="210.82" y1="218.44" x2="317.5" y2="218.44" width="0.762" layer="92"/>
@@ -6136,6 +6139,12 @@ Source: http://us.st.com/stonline/products/literature/ds/7995.pdf</description>
 <pinref part="C3" gate="G$1" pin="P$2"/>
 <pinref part="C4" gate="G$1" pin="P$2"/>
 <wire x1="454.66" y1="193.04" x2="454.66" y2="182.88" width="0.1524" layer="91"/>
+<pinref part="C14" gate="G$1" pin="P$2"/>
+<wire x1="528.32" y1="182.88" x2="535.94" y2="182.88" width="0.1524" layer="91"/>
+<wire x1="535.94" y1="182.88" x2="535.94" y2="193.04" width="0.1524" layer="91"/>
+<pinref part="C15" gate="G$1" pin="P$2"/>
+<wire x1="535.94" y1="182.88" x2="543.56" y2="182.88" width="0.1524" layer="91"/>
+<wire x1="543.56" y1="182.88" x2="543.56" y2="193.04" width="0.1524" layer="91"/>
 </segment>
 <segment>
 <pinref part="JP5" gate="A" pin="1"/>
@@ -6236,6 +6245,12 @@ Source: http://us.st.com/stonline/products/literature/ds/7995.pdf</description>
 <pinref part="C3" gate="G$1" pin="P$1"/>
 <pinref part="C4" gate="G$1" pin="P$1"/>
 <wire x1="454.66" y1="210.82" x2="454.66" y2="200.66" width="0.1524" layer="91"/>
+<pinref part="C14" gate="G$1" pin="P$1"/>
+<wire x1="528.32" y1="210.82" x2="535.94" y2="210.82" width="0.1524" layer="91"/>
+<wire x1="535.94" y1="210.82" x2="535.94" y2="200.66" width="0.1524" layer="91"/>
+<pinref part="C15" gate="G$1" pin="P$1"/>
+<wire x1="535.94" y1="210.82" x2="543.56" y2="210.82" width="0.1524" layer="91"/>
+<wire x1="543.56" y1="210.82" x2="543.56" y2="200.66" width="0.1524" layer="91"/>
 </segment>
 <segment>
 <wire x1="210.82" y1="175.26" x2="246.38" y2="175.26" width="0.1524" layer="91"/>
@@ -6539,6 +6554,8 @@ Source: http://us.st.com/stonline/products/literature/ds/7995.pdf</description>
 </sheet>
 <sheet>
 <plain>
+<text x="142.24" y="114.3" size="1.778" layer="91">OVR and INT2 are redudant.
+They are retained for test purposes only.</text>
 </plain>
 <instances>
 <instance part="OSC1" gate="G$1" x="238.76" y="134.62" smashed="yes">
@@ -6575,10 +6592,9 @@ Source: http://us.st.com/stonline/products/literature/ds/7995.pdf</description>
 <instance part="A500" gate="A" x="241.3" y="43.18"/>
 <instance part="C12" gate="G$1" x="281.94" y="71.12"/>
 <instance part="SPIPORT" gate="A" x="243.84" y="-40.64"/>
-<instance part="AUXPINS" gate="A" x="241.3" y="0"/>
 </instances>
 <busses>
-<bus name="VCC33,VCC,GND,CLK7M,A[0..31],D[0..31],IPL[0..2],FC[0..2],DSACK[0..1],BR,BGACK,R/W20,R/W,CLKCPU,AS20,DS20,BG20,AVEC,SIZ[0..1],DBEN,BERR,RESET,HALT,BG,VPA,VMA,E,AS,UDS,LDS,DTACK,CPCS,CPSENSE,CDIS,MMUDIS,IOR,IOW,INT2,IDECS[0..1],IDELED,IDEWAIT,IDEINT,RAMOE,RAMCS[0..3],INTSIG[0..4],TCK,TMS,TDI,TDO,TDINT,OVL,CIIN,CIIOUT,CBREQ,CBACK,STERM,STATUS,REFILL,SPI_MOSI,SPI_MISO,SPI_CLK,SPI_CS[0..1],AUX[0..1]">
+<bus name="VCC33,VCC,GND,CLK7M,A[0..31],D[0..31],IPL[0..2],FC[0..2],DSACK[0..1],BR,BGACK,R/W20,R/W,CLKCPU,AS20,DS20,BG20,AVEC,SIZ[0..1],DBEN,BERR,RESET,HALT,BG,VPA,VMA,E,AS,UDS,LDS,DTACK,CPCS,CPSENSE,CDIS,MMUDIS,IOR,IOW,INT2,IDECS[0..1],IDELED,IDEWAIT,IDEINT,RAMOE,RAMCS[0..3],INTSIG[0..4],TCK,TMS,TDI,TDO,TDINT,OVL,CIIN,CIIOUT,CBREQ,CBACK,STERM,STATUS,REFILL,SPI_MOSI,SPI_MISO,SPI_CLK,SPI_CS[0..1],SPARE">
 <segment>
 <wire x1="12.7" y1="180.34" x2="12.7" y2="20.32" width="0.762" layer="92"/>
 <wire x1="12.7" y1="180.34" x2="195.58" y2="180.34" width="0.762" layer="92"/>
@@ -7379,13 +7395,6 @@ Source: http://us.st.com/stonline/products/literature/ds/7995.pdf</description>
 <pinref part="XC9572XL(BUS)" gate="XC9572XL-VQ64" pin="PB01/14"/>
 </segment>
 </net>
-<net name="DSACK0" class="0">
-<segment>
-<pinref part="XC9572XL(BUS)" gate="XC9572XL-VQ64" pin="PB02/8"/>
-<wire x1="195.58" y1="104.14" x2="139.7" y2="104.14" width="0.1524" layer="91"/>
-<label x="172.72" y="104.14" size="1.778" layer="95"/>
-</segment>
-</net>
 <net name="A2" class="0">
 <segment>
 <wire x1="292.1" y1="165.1" x2="322.58" y2="165.1" width="0.1524" layer="91"/>
@@ -7542,11 +7551,6 @@ Source: http://us.st.com/stonline/products/literature/ds/7995.pdf</description>
 <label x="393.7" y="66.04" size="1.778" layer="95"/>
 <pinref part="U$2" gate="G$1" pin="A5"/>
 </segment>
-<segment>
-<pinref part="XC9572XL(RAM)" gate="XC9572XL-VQ64" pin="PB03/15"/>
-<wire x1="93.98" y1="-93.98" x2="93.98" y2="-66.04" width="0.1524" layer="91"/>
-<label x="93.98" y="-81.28" size="1.778" layer="95" rot="R90"/>
-</segment>
 </net>
 <net name="A8" class="0">
 <segment>
@@ -7656,11 +7660,6 @@ Source: http://us.st.com/stonline/products/literature/ds/7995.pdf</description>
 <wire x1="378.46" y1="48.26" x2="406.4" y2="48.26" width="0.1524" layer="91"/>
 <label x="393.7" y="48.26" size="1.778" layer="95"/>
 <pinref part="U$2" gate="G$1" pin="A12"/>
-</segment>
-<segment>
-<pinref part="XC9572XL(BUS)" gate="XC9572XL-VQ64" pin="PB03/12"/>
-<wire x1="104.14" y1="20.32" x2="104.14" y2="53.34" width="0.1524" layer="91"/>
-<label x="104.14" y="30.48" size="1.778" layer="95" rot="R90"/>
 </segment>
 </net>
 <net name="A15" class="0">
@@ -8172,25 +8171,11 @@ Source: http://us.st.com/stonline/products/literature/ds/7995.pdf</description>
 <label x="167.64" y="-27.94" size="1.778" layer="95"/>
 </segment>
 </net>
-<net name="AVEC" class="0">
-<segment>
-<pinref part="XC9572XL(BUS)" gate="XC9572XL-VQ64" pin="PB03/14"/>
-<wire x1="91.44" y1="20.32" x2="91.44" y2="53.34" width="0.1524" layer="91"/>
-<label x="91.44" y="30.48" size="1.778" layer="95" rot="R90"/>
-</segment>
-</net>
 <net name="FC0" class="0">
 <segment>
-<wire x1="88.9" y1="20.32" x2="88.9" y2="53.34" width="0.1524" layer="91"/>
-<pinref part="XC9572XL(BUS)" gate="XC9572XL-VQ64" pin="PB03/6"/>
-<label x="88.9" y="30.48" size="1.778" layer="95" rot="R90"/>
-</segment>
-</net>
-<net name="FC1" class="0">
-<segment>
-<pinref part="XC9572XL(BUS)" gate="XC9572XL-VQ64" pin="PB03/11"/>
-<wire x1="86.36" y1="20.32" x2="86.36" y2="53.34" width="0.1524" layer="91"/>
-<label x="86.36" y="30.48" size="1.778" layer="95" rot="R90"/>
+<pinref part="XC9572XL(BUS)" gate="XC9572XL-VQ64" pin="PB03/12"/>
+<wire x1="104.14" y1="20.32" x2="104.14" y2="53.34" width="0.1524" layer="91"/>
+<label x="104.14" y="30.48" size="1.778" layer="95" rot="R90"/>
 </segment>
 </net>
 <net name="BERR" class="0">
@@ -8380,30 +8365,39 @@ Source: http://us.st.com/stonline/products/literature/ds/7995.pdf</description>
 <label x="116.84" y="7.62" size="1.778" layer="95" rot="R90"/>
 </segment>
 </net>
-<net name="AUX0" class="0">
+<net name="IPL2" class="0">
 <segment>
 <pinref part="XC9572XL(BUS)" gate="XC9572XL-VQ64" pin="PB02/3"/>
 <wire x1="195.58" y1="91.44" x2="139.7" y2="91.44" width="0.1524" layer="91"/>
 <label x="172.72" y="91.44" size="1.778" layer="95"/>
 </segment>
-<segment>
-<pinref part="AUXPINS" gate="A" pin="1"/>
-<wire x1="200.66" y1="-7.62" x2="241.3" y2="-7.62" width="0.1524" layer="91"/>
-<wire x1="241.3" y1="-7.62" x2="241.3" y2="-2.54" width="0.1524" layer="91"/>
-<label x="218.44" y="-7.62" size="1.778" layer="95"/>
-</segment>
 </net>
-<net name="AUX1" class="0">
+<net name="IPL1" class="0">
 <segment>
 <pinref part="XC9572XL(BUS)" gate="XC9572XL-VQ64" pin="PB04/17"/>
 <wire x1="195.58" y1="88.9" x2="139.7" y2="88.9" width="0.1524" layer="91"/>
 <label x="172.72" y="88.9" size="1.778" layer="95"/>
 </segment>
+</net>
+<net name="AVEC" class="0">
 <segment>
-<pinref part="AUXPINS" gate="A" pin="2"/>
-<wire x1="292.1" y1="-7.62" x2="243.84" y2="-7.62" width="0.1524" layer="91"/>
-<wire x1="243.84" y1="-7.62" x2="243.84" y2="-2.54" width="0.1524" layer="91"/>
-<label x="266.7" y="-7.62" size="1.778" layer="95"/>
+<pinref part="XC9572XL(BUS)" gate="XC9572XL-VQ64" pin="PB02/8"/>
+<wire x1="195.58" y1="104.14" x2="139.7" y2="104.14" width="0.1524" layer="91"/>
+<label x="172.72" y="104.14" size="1.778" layer="95"/>
+</segment>
+</net>
+<net name="FC1" class="0">
+<segment>
+<pinref part="XC9572XL(BUS)" gate="XC9572XL-VQ64" pin="PB03/14"/>
+<wire x1="91.44" y1="20.32" x2="91.44" y2="53.34" width="0.1524" layer="91"/>
+<label x="91.44" y="30.48" size="1.778" layer="95" rot="R90"/>
+</segment>
+</net>
+<net name="SPARE" class="0">
+<segment>
+<pinref part="XC9572XL(RAM)" gate="XC9572XL-VQ64" pin="PB03/15"/>
+<wire x1="93.98" y1="-93.98" x2="93.98" y2="-66.04" width="0.1524" layer="91"/>
+<label x="93.98" y="-81.28" size="1.778" layer="95" rot="R90"/>
 </segment>
 </net>
 </nets>
@@ -8411,4 +8405,10 @@ Source: http://us.st.com/stonline/products/literature/ds/7995.pdf</description>
 </sheets>
 </schematic>
 </drawing>
+<compatibility>
+<note version="6.3" minversion="6.2.2" severity="warning">
+Since Version 6.2.2 text objects can contain more than one line,
+which will not be processed correctly with this version.
+</note>
+</compatibility>
 </eagle>
