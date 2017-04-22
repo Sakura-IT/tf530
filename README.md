@@ -6,7 +6,7 @@ This repository contains all the files needed to produce a copy of my accelerato
 
 The CPLD Required is a XC9572XL-10VQ64
 
-Everything in this repository is released under the GNU GPLv2. You may create or base commercial PCBs from the work in this repository but you must make the sources for all derivative work available. 
+Everything in this repository is released under the GNU GPLv2. You may create or base commercial PCBs from the work in this repository but you must make the sources for all derivative work available. I have noticed some forks have removed copyright notices. This is a breach of the GPL. 
 
 ## Firmware / Requirements
 
