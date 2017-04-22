@@ -19,6 +19,12 @@ Everything in this repository is released under the GNU GPLv2. You may create or
 
 This project and all the files contained are released under the GNU GPLv2. If you build a modified version of the board you must supply the end user with all the sources (this can be a web link).
 
+## The TerribleFore 530 board (Revision 3)
+
+Completely untested board link.... use with caution!!!! Do not come crying to me if it didnt work!!
+
+http://dirtypcbs.com/store/designer/details/12476/2654/tf530-rev3-zip
+
 ##The TerribleFire 530 board (Revision 2)
 
 This board is now in Beta. It may not work in all circumstances but it has been verified to boot AmigaOS 1.3, 2.05 and 3.1 and run various games and desktop apps at 25Mhz. Operation is not guarunteed to be crash free but will work in most "happy path" situations.
