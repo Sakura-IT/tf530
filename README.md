@@ -30,7 +30,9 @@ I accept no responsibiltiy for any damage to any equipment that results from the
 
 ## Installation
 
-Installation no longer needs the OVR and INT2 signals connected and other (well behaved) Autoconfig devices will work alongside the TF530. The autoconfig space asserts the internal OVR signal when there are PICs remaining to be configured. After which the autoconfig will probe the standard bus. This revision should work on the A2000 (untested). 
+As of Revision 3 installation no longer needs the OVR and INT2 signals connected to the Amiga motherboard. The headers remain on the TF530 for testing but do not need to be connected although it should make little difference if they are connected. Well behaved Autoconfig devices will work alongside the TF530. The autoconfig space asserts the internal OVR signal when there are PICs remaining to be configured. After which the autoconfig will probe the standard bus. This revision should work on the A2000 (untested). 
+
+IPL0 has not been routed because we only ever need to assert INT2 and/or INT6. 
 
 ## What does the board look like
 
