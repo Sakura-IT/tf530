@@ -30,9 +30,7 @@ I accept no responsibiltiy for any damage to any equipment that results from the
 
 ## Installation
 
-Installation is exactly the same as the Kipper2k A508. Refer to http://www.kipper2k.com/a500fastmem.html
-
-You need to connect the OVR and INT2 signals to the A500 header port. 
+Installation no longer needs the OVR and INT2 signals connected and other (well behaved) Autoconfig devices will work alongside the TF530. The autoconfig space asserts the internal OVR signal when there are PICs remaining to be configured. After which the autoconfig will probe the standard bus. This revision should work on the A2000 (untested). 
 
 ## What does the board look like
 
