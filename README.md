@@ -36,11 +36,13 @@ IPL0 has not been routed because we only ever need to assert INT2 and/or INT6.
 
 ## What does the board look like
 
-![Image of Top of PCB](gerbers/tf530_rev2_top.jpg)
+The TF530 Rev 3 looks like...
 
-![Image of Bottom of PCB](gerbers/tf530_rev2_bottom.jpg)
+![Image of Top of PCB](gerbers/tf530_rev3_top.jpg)
 
-## The BOM 
+![Image of Bottom of PCB](gerbers/tf530_rev3_bottom.jpg)
+
+## The BOM (WARNING! This is out of date)
 
 | Qty | Value           | Device             | Package              | Parts                                                  | Description                   | 
 |-----|-----------------|--------------------|----------------------|--------------------------------------------------------|-------------------------------|
