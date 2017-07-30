@@ -59,7 +59,7 @@ The TF530 Rev 3 looks like...
 | 1   | 1K              | RESISTOR1206       | 1206                 | R1                                                               | Resistors                     |
 | 2   | 47K             | RESISTOR1206       | 1206                 | R2, R3                                                           | Resistors                     |
 | 2   | 74LVC1G17DBV    | 74LVC1G17DBV       | SOT23-5              | IC4, IC5                                                         | Single Schmitt-Trigger Buffer |
-| 4   | AS7C4096A-12TCN | AS7C4096A-12TCN    | TSOP44-II            | IC6, IC7, IC8, IC9                                               | SRAM 512k x 8, 5V             |
+| 4   | AS7C4096A-12TCN | AS7C4096A-12TCN    | TSOP44-II            | IC6, IC7, IC8, IC9                                               | SRAM 512k x 8, 5V DO NOT USE ISSI Chips!!      |
 | 1   | BYPASS          | JUMPER-2PTH        | 1X02                 | BYPASS                                                           | Jumper                        |
 | 3   | CAY16-103J4LF   | CAY16-103J4LF      | RESCAXE80P320X160-8N | RN1, RN2, RN3                                                    | Res Thick Film Array 10K Ohm  |
 | 1   | CDIS            | JUMPER-2PTH        | 1X02                 | JP5                                                              | Jumper                        |
