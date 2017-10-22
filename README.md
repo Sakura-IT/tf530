@@ -1,6 +1,6 @@
 # TF530 Revision 3
 
-WARNING: I have just committed revision 3 of the board. I havent verified this yet.
+WARNING: This board has not been CE tested. It may cause damage to your A500. I take no responsibility for this. 
 
 This repository contains all the files needed to produce a copy of my accelerator board.
 
