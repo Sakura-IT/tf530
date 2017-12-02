@@ -52,12 +52,12 @@ The TF530 Rev 3 looks like...
 
 | Qty | Value           | Device             | Package              | Parts                                                            | Description                   |
 |-----|-----------------|--------------------|----------------------|------------------------------------------------------------------|-------------------------------|
-| 1   |                 | MC68030RC          | MPGA128              | IC1                                                              | 68xxx PROCESSOR               |
-| 1   |                 | MC68881FN-SOC      | PLCC68-S             | IC2                                                              | 68xxx CO-PROCESSOR (FPU)      |
+| 1   |                 | MC68030RC          | MPGA128              | IC1                                                              | 68030 PROCESSOR               |
+| 1   |                 | MC68882FN          | PLCC68-S             | IC2                                                              | 68882 CO-PROCESSOR (FPU) + PLCC68 Thru Hole Socket |
 | 2   | 0.1uF           | 0.1UF-25V(+80/-20%)| 0603-CAP             | C16, C17                                                         | CAP-00810                     |
 | 15  | 10uF            | CAP_CERAMIC1206    | 1206                 | C1, C2, C3, C4, C5, C6, C7, C8, C9, C10, C11, C12, C13, C14, C15 | Ceramic Capacitors            |
 | 1   | 1K              | RESISTOR1206       | 1206                 | R1                                                               | Resistors                     |
-| 2   | 47K             | RESISTOR1206       | 1206                 | R2, R3                                                           | Resistors                     |
+| 2   | 47K             | RESISTOR1206       | 1206                 | R2, R3                                                           | Resistors (See Notes)         |
 | 2   | 74LVC1G17DBV    | 74LVC1G17DBV       | SOT23-5              | IC4, IC5                                                         | Single Schmitt-Trigger Buffer |
 | 4   | AS7C4096A-12TCN | AS7C4096A-12TCN    | TSOP44-II            | IC6, IC7, IC8, IC9                                               | SRAM 512k x 8, 5V DO NOT USE ISSI Chips!!      |
 | 1   | BYPASS          | JUMPER-2PTH        | 1X02                 | BYPASS                                                           | Jumper                        |
@@ -69,10 +69,15 @@ The TF530 Rev 3 looks like...
 | 1   | INF             | 0.05OHM-1/5W-1%    | 0603                 | RCLKLOAD                                                         | Not Required - Experimental   |
 | 1   | JTAG            | HEADER-1X6ROUND    | 1X06_ROUND           | JTAG                                                             | PIN HEADER                    |
 | 1   | LM1117-3.3      | V_REG_LM1117SOT223 | SOT223               | IC3                                                              | 3.3V Voltage Regulator LM1117 |
-| 1   | MC68000         | MC68000P           | DIL64                | X1                                                               | 68xxx PROCESSOR               |
+| 1   | MC68000         | MC68000P           | DIL64                | X1                                                               | 68xxx CPU Slot Strip Headers  |
 | 1   | MMUDIS          | JUMPER-2PTH        | 1X02                 | JP3                                                              | Jumper                        |
 | 1   | SPI PORT        | PINHD-2X6          | 2X06                 | SPIPORT                                                          | PIN HEADER                    |
 | 1   | TP1             | JUMPER-2PTH        | 1X02                 | TP1                                                              | Jumper                        |
-| 1   | X20MHZ          | OSCILLATOR         | OSC_7X5MM            | OSC1                                                             | Oscillator e.g. 24MHz         |
+| 1   | X25MHZ          | OSCILLATOR         | OSC_7X5MM            | OSC1                                                             | Oscillator e.g. 25MHz         |
 | 2   | XC9572XL-VQ64   | XC9572XL-VQ64      | VQ64                 | XC9572XL(BUS), XC9572XL(RAM)                                     | Xilinx CPLD                   |
+
+### Notes
+
+* _The CPU and (optional) FPU must be 25MHz capable._
+* _At higher frequencies, you may need to experment with different values of R2 and R3._
 
