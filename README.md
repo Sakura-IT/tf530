@@ -56,8 +56,7 @@ The TF530 Rev 3 looks like...
 | 1   |                 | MC68882FN          | PLCC68-S             | IC2                                                              | 68882 CO-PROCESSOR (FPU) + PLCC68 Thru Hole Socket |
 | 2   | 0.1uF           | 0.1UF-25V(+80/-20%)| 0603-CAP             | C16, C17                                                         | CAP-00810                     |
 | 15  | 10uF            | CAP_CERAMIC1206    | 1206                 | C1, C2, C3, C4, C5, C6, C7, C8, C9, C10, C11, C12, C13, C14, C15 | Ceramic Capacitors            |
-| 1   | 1K              | RESISTOR1206       | 1206                 | R1                                                               | Resistors                     |
-| 2   | 47K             | RESISTOR1206       | 1206                 | R2, R3                                                           | Resistors (See Notes)         |
+| 3   | 1K              | RESISTOR1206       | 1206                 | R1, R2, R3                                                                  | Resistors                     |
 | 2   | 74LVC1G17DBV    | 74LVC1G17DBV       | SOT23-5              | IC4, IC5                                                         | Single Schmitt-Trigger Buffer |
 | 4   | AS7C4096A-12TCN | AS7C4096A-12TCN    | TSOP44-II            | IC6, IC7, IC8, IC9                                               | SRAM 512k x 8, 5V DO NOT USE ISSI Chips!!      |
 | 1   | BYPASS          | JUMPER-2PTH        | 1X02                 | BYPASS                                                           | Jumper                        |
@@ -78,6 +77,4 @@ The TF530 Rev 3 looks like...
 
 ### Notes
 
-* _The CPU and (optional) FPU must be 25MHz capable._
-* _At higher frequencies, you may need to experment with different values of R2 and R3._
-
+* _The CPU and (optional) FPU must be 25MHz/33Mhz capable._
