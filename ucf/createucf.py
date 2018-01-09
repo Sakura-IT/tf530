@@ -41,11 +41,14 @@ with open(fname) as f:
                 tokens = (line).split()
                 if len(tokens) == 0:
                         continue
-                if len(tokens) == 5:
+                print len(tokens)
+                if len(tokens) == 3:
                         currentNet = tokens[0].replace("/","")
                         tokens = tokens[1:]
+                print tokens
                 if (currentNet is not None) and not currentNet in exclude:
                         chip = tokens[0]
+                        print chip
                         if chip in cplds:
                                 try:
                                         ucf = ucfs[chip]

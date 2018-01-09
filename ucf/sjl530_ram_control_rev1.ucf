@@ -1,0 +1,94 @@
+# Copyright (c) 2016, Stephen J. Leary
+# All rights reserved.
+#	
+# This file is part of TF530 (Terrible Fire 030 Accelerator)
+#
+# TF530 is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# TF530 is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with TF530. If not, see <http://www.gnu.org/licenses/>.
+
+#Clocks
+NET "CLKCPU"		LOC="16";
+NET "CLKCPU" BUFG=CLK;
+NET "CLKCPU" TNM_NET = "CLKCPU"; # gives the net clk a group name as CLKCPU
+TIMESPEC "TS_CLKCPU" = PERIOD "CLKCPU" 20 ns ; # add 20 ns PERIOD constraint the
+OFFSET = IN 5 ns BEFORE "CLKCPU" ; # add  offset in constraint
+OFFSET = OUT 5 ns AFTER "CLKCPU" ; # add  offset out constraint
+
+# alot of address bus. For zorro mainly (probably too much)
+NET "A1"		LOC="5";
+NET "AB<2>"		LOC="6";
+NET "AB<3>"		LOC="7";
+NET "AB<4>"		LOC="8";
+NET "AB<5>"		LOC="9";
+NET "AB<6>"		LOC="10";
+NET "AB<7>"		LOC="36";
+NET "AB<8>"		LOC="38";
+
+NET "A<12>"		LOC="56";
+NET "A<13>"		LOC="13";
+#NET "A<14>"		LOC="12";
+NET "A<15>"		LOC="1";
+NET "A<16>"		LOC="35";
+NET "A<17>"		LOC="20";
+NET "A<18>"		LOC="19";
+NET "A<19>"		LOC="18";
+NET "A<20>"		LOC="17";
+NET "A<21>"		LOC="64";
+NET "A<22>"		LOC="63";
+NET "A<23>"		LOC="59";
+
+# bus conrol and reset
+NET "RESET"		LOC="62";
+NET "RW20"		LOC="40";
+NET "AS20"		LOC="47";
+NET "DS20"		LOC="45";
+
+# burst and cache control .
+
+NET "CBACK"		LOC="48";
+#NET "CBREQ"		LOC="46";
+NET "CIIN"		LOC="44";
+NET "STERM"		LOC="43";
+
+# data bus pins for zorro autoconfig.
+
+#NET "D<24>"		LOC="52";
+#NET "D<25>"		LOC="51";
+NET "D<26>"		LOC="4";
+NET "D<27>"		LOC="11";
+NET "D<28>"		LOC="33";
+NET "D<29>"		LOC="32";
+NET "D<30>"		LOC="31";
+NET "D<31>"		LOC="34";
+
+# signals mapped between the CPLDs for general purpose use.
+
+NET "INTSIG"		LOC="58";
+NET "INTSIG_A0"		LOC="57";
+#NET "INTSIG_A12"	LOC="56";
+NET "INTSIG_A15"	LOC="61";
+NET "INTSIG_INT2"	LOC="60";
+
+# Spare pins on the 0.1 header.
+NET "SPARE"		LOC="2";
+
+# individual chip selects 
+NET "RAMCS<0>"		LOC="27";
+NET "RAMCS<1>"		LOC="25";
+NET "RAMCS<2>"		LOC="24";
+NET "RAMCS<3>"		LOC="23";
+NET "RAMOE"		    LOC="22";
+
+# bus transfer size. (dont need?)
+NET "SIZ<0>"		LOC="42";
+NET "SIZ<1>"		LOC="39";
