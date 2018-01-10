@@ -232,7 +232,7 @@ assign IPL = 3'bzzz;
 assign HALT = 1'bZ;
 assign RESET = 1'bZ;
 
-assign BERR = (CPCS_INT | ~CPSENSE) ? 1'b1 : 1'b0;
+assign BERR = (CPCS_INT | ~CPSENSE) ? 1'bz : 1'b0;
 assign CPCS = CPCS_INT; 
 
 endmodule
