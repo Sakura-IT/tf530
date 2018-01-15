@@ -195,7 +195,7 @@ always @(posedge CLKCPU or posedge AS20) begin
         
         STERM_D <=  RAMOE_INT | ~STERM_D | WAITSTATE;
         STERM_D2 <= STERM_D | ~STERM_D2;
-        CIIN_D <=  ~ROM_ACCESS | ~RAMOE_INT;
+        CIIN_D <=  ~(ROM_ACCESS & RAMOE_INT);
         CBACK_D <= 1'b1; //CBREQ | AS20 | &AC;
         intcycle_dout <= (fram_access & spi_access & GAYLE_ACCESS) | AS20 | ~RW20;
 
