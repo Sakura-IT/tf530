@@ -16,13 +16,13 @@
 # You should have received a copy of the GNU General Public License
 # along with TF530. If not, see <http://www.gnu.org/licenses/>.
 
+
 #Clocks
 NET "CLKCPU"		LOC="16";
 NET "CLKCPU" BUFG=CLK;
 NET "CLKCPU" TNM_NET = "CLKCPU"; # gives the net clk a group name as CLKCPU
-TIMESPEC "TS_CLKCPU" = PERIOD "CLKCPU" 12 ns ; # add 20 ns PERIOD constraint the
-#OFFSET = IN 15 ns VALID 5ns BEFORE "CLKCPU" ; # add  offset in constraint
-OFFSET = OUT 5 ns AFTER "CLKCPU" ; # add  offset out constraint
+TIMESPEC "TS_CLKCPU" = PERIOD "CLKCPU" 20 ns; # add 20 ns PERIOD constraint the
+OFFSET = OUT 20 ns AFTER "CLKCPU" ; # add  global offset out constraint
 
 NET "A<0>"      LOC="51";
 NET "A<1>"      LOC="4";
@@ -43,6 +43,7 @@ NET "A<21>"      LOC="2";
 NET "A<22>"      LOC="1";
 NET "A<23>"      LOC="64";
 NET "AS20"      LOC="47";
+
 NET "CBACK"      LOC="48";
 #NET "CBREQ"      LOC="46";
 NET "CIIN"      LOC="44";
@@ -57,18 +58,27 @@ NET "D<7>"      LOC="34";
 NET "DS20"      LOC="45";
 NET "IDEINT"      LOC="57";
 NET "IDEWAIT"      LOC="52";
+NET "IDEWAIT" OFFSET = OUT 15 ns AFTER "CLKCPU";
 NET "INT2"      LOC="63";
 NET "INTCYCLE"      LOC="56";
+# INTCYCLE Tells the buscpld to not start the next cycle. 
+# so therefore it needs to be set quickly.
+NET "INTCYCLE" OFFSET = OUT 5 ns AFTER "CLKCPU";
 NET "RW20"      LOC="40";
 NET "RAMCS<0>"      LOC="27";
+NET "RAMCS<0>" OFFSET = OUT 12 ns AFTER "CLKCPU";
 NET "RAMCS<1>"      LOC="25";
+NET "RAMCS<1>" OFFSET = OUT 12 ns AFTER "CLKCPU";
 NET "RAMCS<2>"      LOC="24";
+NET "RAMCS<2>" OFFSET = OUT 12 ns AFTER "CLKCPU";
 NET "RAMCS<3>"      LOC="23";
+NET "RAMCS<3>" OFFSET = OUT 12 ns AFTER "CLKCPU";
 NET "RAMOE"      LOC="22";
+NET "RAMOE" OFFSET = OUT 12 ns AFTER "CLKCPU";
 NET "RESET"      LOC="60";
 NET "SIZ<0>"      LOC="42";
 NET "SIZ<1>"      LOC="39";
-#NET "SPARE"      LOC="36";
+NET "EXTINT"      LOC="36";
 NET "SPI_CLK"      LOC="15";
 NET "SPI_CS<0>"      LOC="7";
 NET "SPI_CS<1>"      LOC="8";

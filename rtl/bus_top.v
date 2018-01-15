@@ -35,9 +35,9 @@ module bus_top(
 
            input 	CLKCPU,
            input 	CLK7M,
-			  
+
            output HALT,
-	   output RESET, 
+           output RESET,
 
            input 	BG20,
            input 	AS20,
@@ -127,22 +127,22 @@ m6800 M6800BUS(
           .DSACK1	( DSACK1_SYNC 	)
       );
 
-// module to control IDE timings. 
+// module to control IDE timings.
 ata ATA (
 
-	.CLK	( CLKCPU	), 
-	.AS	( AS20	),
-	.RW	( RW20	),
-	.A		( A		),
-	.WAIT	( IDEWAIT), 
-	
-	.IDECS( IDECS	),
-	.IOR	( IOR		),
-	.IOW	( IOW		),
-	.DTACK( DTACK_IDE	),
-   .ACCESS( GAYLE_IDE )
-	
-);
+        .CLK	( CLKCPU	),
+        .AS	( AS20	),
+        .RW	( RW20	),
+        .A		( A		),
+        .WAIT	( IDEWAIT),
+
+        .IDECS( IDECS	),
+        .IOR	( IOR		),
+        .IOW	( IOW		),
+        .DTACK( DTACK_IDE	),
+        .ACCESS( GAYLE_IDE )
+
+    );
 
 
 wire FASTCYCLE_INT = AS20DLY2 | ~IDEWAIT | INTCYCLE;
@@ -155,33 +155,33 @@ always @(posedge CLK7M or posedge AS20) begin
 
     if (AS20 == 1'b1) begin
 
-		  AS_INT <= 1'b1;
-		  LDS_INT <= 1'b1;
-		  UDS_INT <= 1'b1;
-		  S4MASK <= 1'b1;
-		  
+        AS_INT <= 1'b1;
+        LDS_INT <= 1'b1;
+        UDS_INT <= 1'b1;
+        S4MASK <= 1'b1;
+
     end else begin
 
         // assert these lines in S2
-		  // the 68030 assert them one half clock early. 
+        // the 68030 assert them one half clock early.
         AS_INT <= AS20 | FPUOP | ~GAYLE_IDE | ~INTCYCLE;
-		  
-		if (RW20 == 1'b1) begin 
 
-        // reading when reading the signals are asserted in 7Mhz S2
-        UDS_INT <= DS20 | A[0];
-        LDS_INT <= DS20 | ({A[0], SIZ[1:0]} == 3'b001);  
+        if (RW20 == 1'b1) begin
 
-      end else begin 
+            // reading when reading the signals are asserted in 7Mhz S2
+            UDS_INT <= DS20 | A[0];
+            LDS_INT <= DS20 | ({A[0], SIZ[1:0]} == 3'b001);
 
-        // when writing the the signals are asserted in 7Mhz S4 
-        UDS_INT <= DS20 | AS_INT | A[0];
-        LDS_INT <= DS20 | AS_INT  | ({A[0], SIZ[1:0]} == 3'b001);  
+        end else begin
 
-      end
-		
-		S4MASK <= (AS_INT | DTACK) & DTACK_IDE;
-		
+            // when writing the the signals are asserted in 7Mhz S4
+            UDS_INT <= DS20 | AS_INT | A[0];
+            LDS_INT <= DS20 | AS_INT  | ({A[0], SIZ[1:0]} == 3'b001);
+
+        end
+
+        S4MASK <= (AS_INT | DTACK) & DTACK_IDE;
+
 
     end
 
@@ -192,20 +192,20 @@ always @(posedge CLKCPU or posedge AS20) begin
     if (AS20 == 1'b1) begin
 
         AS20DLY <= 1'b1;
-		  AS20DLY2 <= 1'b1;
+        AS20DLY2 <= 1'b1;
         RW20DLY <= 1'b1;
         DS20DLY <= 1'b1;
         FASTCYCLE <= 1'b1;
-		  CPCS_INT <= 1'b1;
-		  AVEC_INT <= 1'b1;
+        CPCS_INT <= 1'b1;
+        AVEC_INT <= 1'b1;
 
     end else begin
 
         // Delayed Address Strobes
         AS20DLY <= AS20 | FPUOP;
-		  CPCS_INT <= ~FPUOP | AS20;
-		  AVEC_INT <= ~IACK | VPA;
-		  AS20DLY2 <= AS20DLY;
+        CPCS_INT <= ~FPUOP | AS20;
+        AVEC_INT <= ~IACK | VPA;
+        AS20DLY2 <= AS20DLY;
         RW20DLY <= RW20 | FPUOP;
         DS20DLY <= DS20 | FPUOP;
         FASTCYCLE <= FASTCYCLE_INT;
@@ -227,12 +227,12 @@ assign DSACK[1] = FPUOP | (S4MASK | ~INTCYCLE) & DSACK1_SYNC & FASTCYCLE;
 assign DSACK[0] = 1'bz;
 
 assign BG = AS ?  BG20 : 1'bz;
-assign AVEC = AVEC_INT; 
+assign AVEC = AVEC_INT;
 assign IPL = 3'bzzz;
 assign HALT = 1'bZ;
 assign RESET = 1'bZ;
 
 assign BERR = (CPCS_INT | ~CPSENSE) ? 1'bz : 1'b0;
-assign CPCS = CPCS_INT; 
+assign CPCS = CPCS_INT;
 
 endmodule

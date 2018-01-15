@@ -23,14 +23,14 @@ module gayle(
            input 	        CLKCPU,
            input 	        RESET,
            input 			  DS20,
-              input          AS20,
+           input          AS20,
            input 	        RW,
            input 	        IDE_INT,
            output 	     INT2,
            input [23:0]    A,
            input          D7,
            output		     DOUT7,
-              output         ACCESS
+           output         ACCESS
        );
 
 parameter GAYLE_ID_VAL = 4'hd;
@@ -41,10 +41,10 @@ wire GAYLE_ID   = (A[23:15] != {8'hDE, 1'b0});
 wire GAYLE_ACCESS = (GAYLE_ID & GAYLE_REGS);
 
 reg data_out = 1'b0;
-   
+
 reg [3:0] gayleid = GAYLE_ID_VAL;
 
-reg 	  intena = 1'b0;   
+reg 	  intena = 1'b0;
 reg 	  intlast = 1'b0;
 
 // $DE1000
@@ -66,7 +66,7 @@ localparam GAYLE_INTENA_WR = {3'h2,1'b0};
 wire INT_CHNG;
 wire INT_CHNG_ACCESS = {(GAYLE_ACCESS | AS20),A[18],{A[13:12]},RW} != {1'b0,GAYLE_INTCHG_WR};
 
-wire DS = DS20 | GAYLE_ACCESS | AS20;  
+wire DS = DS20 | GAYLE_ACCESS | AS20;
 
 FDCPE #(.INIT(1'b1))
       INT_CHNG_FF (
@@ -91,23 +91,23 @@ always @(negedge DS or negedge RESET) begin
         // resetting to low ensures that the next cycle
         // after reset is disasserted is not a bus cycle.
         intena <= 1'b0;
-          gayleid <= 4'hD;
+        gayleid <= 4'hD;
 
     end else begin
-        
-            case ({A[18],{A[13:12]},RW})
-                 GAYLE_STAT_RD: data_out <= IDE_INT;
-                 GAYLE_INTCHG_RD: data_out <= INT_CHNG;
-                 GAYLE_ID_RD: begin
-                      data_out <=  gayleid[3];
-                      gayleid <= {gayleid[2:0],1'b1};
-                 end
-                 GAYLE_ID_WR: gayleid <= 4'hD;
-                 GAYLE_INTENA_RD: data_out <= intena;
-                 GAYLE_INTENA_WR: intena <= D7;
-                 default: data_out <= 'b0;
-            endcase
-            
+
+        case ({A[18],{A[13:12]},RW})
+            GAYLE_STAT_RD: data_out <= IDE_INT;
+            GAYLE_INTCHG_RD: data_out <= INT_CHNG;
+            GAYLE_ID_RD: begin
+                data_out <=  gayleid[3];
+                gayleid <= {gayleid[2:0],1'b1};
+            end
+            GAYLE_ID_WR: gayleid <= 4'hD;
+            GAYLE_INTENA_RD: data_out <= intena;
+            GAYLE_INTENA_WR: intena <= D7;
+            default: data_out <= 'b0;
+        endcase
+
     end
 end
 

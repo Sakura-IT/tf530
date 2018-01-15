@@ -1,6 +1,6 @@
 BOARD:=tf530
 BUSSOURCES="../rtl/bus_top.v  ../rtl/m6800.v ../rtl/ata.v"
-RAMSOURCES="../rtl/ram_top.v ../rtl/fastram.v ../rtl/gayle.v ../rtl/spiport.v"
+RAMSOURCES="../rtl/ram_top.v ../rtl/fastram.v ../rtl/gayle.v ../rtl/zxmmc.v ../rtl/autoconfig.v"
 
 all: rev2 rev3 
 rev2: clean
