@@ -112,7 +112,7 @@ int __UserDevOpen(struct IOExtTD *iotd, ULONG unitnum, ULONG flags)
     struct Node* node = (struct Node*)iotd;
     int io_err = IOERR_OPENFAIL;
 
-    //debug("sd unit: %ld, flags: %lx",unitnum,flags);
+    debug("sd unit: %ld, flags: %lx",unitnum,flags);
 
     if (iotd && unitnum==0) {
         io_err = 0;
@@ -140,8 +140,8 @@ void __BeginIO(struct IORequest *io) {
     if (!sdu) return;
     if (!io) return;
 
-    //debug("io_Command = %ld, io_Flags = 0x%lx quick = %lx", io->io_Command, io->io_Flags, (io->io_Flags & IOF_QUICK));
-
+    debug("io_Command = %ld, io_Flags = 0x%lx quick = %lx", io->io_Command, io->io_Flags, (io->io_Flags & IOF_QUICK));
+    
     io->io_Error = SD_PerformIO(sdu, io);
 
     if (!(io->io_Flags & IOF_QUICK)) {
@@ -160,7 +160,7 @@ void SD_InitUnit(struct SDBase* SDBase, int id, uint8* registers)
 {
     struct SDUnit *sdu = &SDBase->sd_Unit[id];
 
-    //debug("init sdbase: %lx sdu: %lx id: %lx",SDBase,sdu,id);
+    debug("init sdbase: %lx sdu: %lx id: %lx",SDBase,sdu,id);
 
     if (id == 0) {
         sdu->sdu_Registers = (void*)registers;
@@ -210,7 +210,7 @@ uint32 SD_ReadWrite(struct SDUnit *sdu, struct IORequest *io, uint32 offset, BOO
         uint32 retries = 10;
         do {
             debug("write %lx %lx retry %lx regs %lx",block,num_blocks,retries,sdu->sdu_Registers);
-            sderr = sdcmd_write_blocks(sdu->sdu_Registers, data, block, num_blocks);
+            sderr = sdcmd_write_blocks(sdu, data, block, num_blocks);
             if (sderr) {
                 debug("err %x",sderr);
                 sd_reset(sdu);
@@ -231,7 +231,7 @@ uint32 SD_ReadWrite(struct SDUnit *sdu, struct IORequest *io, uint32 offset, BOO
         sderr = 0;*/
     } else {
         debug("read %lx %lx",block,num_blocks);
-        sderr = sdcmd_read_blocks(sdu->sdu_Registers, data, block, num_blocks);
+        sderr = sdcmd_read_blocks(sdu, data, block, num_blocks);
         if (sderr) {
             debug("err %x",sderr);
         } else {
@@ -358,7 +358,7 @@ LONG SD_PerformIO(struct SDUnit *sdu, struct IORequest *io)
         break;
 
     default:
-        //kprintf("Unknown IO command: %ld\n", io->io_Command);
+        kprintf("Unknown IO command: %ld\n", io->io_Command);
         err = IOERR_NOCMD;
         break;
     }
@@ -370,7 +370,6 @@ LONG SD_PerformSCSI(struct SDUnit *sdu, struct IORequest *io)
 {
     struct IOStdReq *iostd = (struct IOStdReq *)io;
     struct SCSICmd *scsi = iostd->io_Data;
-    uint8* registers = sdu->sdu_Registers;
     uint8* data = (uint8*)scsi->scsi_Data;
     uint32 i, block, blocks, maxblocks;
     long err;
@@ -384,12 +383,12 @@ LONG SD_PerformSCSI(struct SDUnit *sdu, struct IORequest *io)
     maxblocks = SD_CYL_SECTORS * SD_CYLS;
 
     if (scsi->scsi_CmdLength < 6) {
-        //debug("SCSICMD BADLENGTH2");
+        debug("SCSICMD BADLENGTH2");
         return IOERR_BADLENGTH;
     }
 
     if (scsi->scsi_Command == NULL) {
-        //debug("SCSICMD IOERR_BADADDRESS1");
+        debug("SCSICMD IOERR_BADADDRESS1");
         return IOERR_BADADDRESS;
     }
 
@@ -460,7 +459,7 @@ LONG SD_PerformSCSI(struct SDUnit *sdu, struct IORequest *io)
             break;
         }
 
-        r1 = sdcmd_read_blocks(registers, data, block, blocks);
+        r1 = sdcmd_read_blocks(sdu, data, block, blocks);
         if (r1) {
             err = HFERR_BadStatus;
             break;
@@ -487,7 +486,7 @@ LONG SD_PerformSCSI(struct SDUnit *sdu, struct IORequest *io)
             break;
         }
         debug("scsi_write %lx %lx\n",block,blocks);
-        r1 = sdcmd_write_blocks(registers, data, block, blocks);
+        r1 = sdcmd_write_blocks(sdu, data, block, blocks);
         if (r1) {
             err = HFERR_BadStatus;
             break;

@@ -52,16 +52,17 @@ int main(int argc, char** argv) {
     printf("Control register: %d\n",registers->ctrl);
 
     printf("Resetting...\n");
+
     if (sd_reset(unit) == 0)
     {
         printf("done\n");
     }
     else
     {
-        printf("failed\n");
+    printf("failed\n");
         return 1;
     }
-
+    
     data=(uint8*)malloc(100*512);
     memset(data,0xfe,100*512);
 
@@ -88,7 +89,6 @@ int main(int argc, char** argv) {
     printf("10000 blocks write test...\n");
     res=sdcmd_write_blocks(unit,data,1000000,10000); // approx. at 488 MB
     printf("done. res=%d\n",res);
-
     free(unit);
     free(data);
 }

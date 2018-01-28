@@ -182,17 +182,16 @@ uint8 inline spi_recv_byte(struct TF530SDRegs* port)
     return port->data;
 }
 
-uint8 spi_cs_unassert(struct TF530SDRegs* port)
+void spi_cs_unassert(struct TF530SDRegs* port)
 {
     uint8 current = port->ctrl;
     port->ctrl = current | TF530_CTRL_CS0 | TF530_CTRL_CS1;
-    // return the old state
-    return current;
 }
 
-void spi_cs_assert(struct TF530SDRegs* port, uint8 newstate)
+void spi_cs_assert(struct TF530SDRegs* port)
 {
-    port->ctrl = newstate;
+    uint8 current = port->ctrl;
+    port->ctrl = current & (~TF530_CTRL_CS0);
 }
 
 /*
@@ -213,9 +212,10 @@ static int sd_wait_for_not_idle(struct TF530SDRegs* port, uint8 cmd, uint32 arg)
     while(end < 10000) {
         if (cmd == ACMD41)
             if (sd_command(port, CMD55,0L,0,R1,response) < 0)
-                break;
+		break;
         if (sd_command(port, cmd,arg,0,R1,response) < 0)
-            break;
+		break;
+
         if ((response[0] & SD_ERR_IDLE_STATE) == 0)
             return 0;
         end++;
@@ -370,11 +370,15 @@ static void sd_cardtype(struct SDUnit *unit)
      */
     if ((sd_command(port, CMD8,0x000001aaL,0x87,R7,response) >= 0)
             && ((response[0]&SD_ERR_ILLEGAL_CMD) == 0)) {
-        printf("CMD8 R7 = %02x:%02x:%02x:%02x:%02x\n", response[0], response[1], response[2], response[3], response[4]);
+      //printf("CMD8 R7 = %02x:%02x:%02x:%02x:%02x\n", response[0], response[1], response[2], response[3], response[4]);
         if ((response[3]&0x0f) != 0x01)     /* voltage not accepted */
+	  {
+	    printf("Voltage Not Accepted\n");
             return;
+	  }
         if (response[4] != 0xaa)            /* check pattern mismatch */
             return;
+        
         if (sd_wait_for_not_idle(port, ACMD41,0x40000000L) != 0)
             return;
         unit->sdu_CardType = CARDTYPE_SD;
@@ -418,18 +422,22 @@ static void sd_features(struct SDUnit* unit)
     uint8 response[5];
     struct TF530SDRegs* port = (struct TF530SDRegs*)unit->sdu_Registers;
     unit->sdu_CardFeatures = 0;
-
+    
     /*
      *  check SDv2 for block addressing
      */
-    if ((unit->sdu_CardType == CARDTYPE_SD) && (unit->sdu_CardVersion == 2)) {
+    if ((unit->sdu_CardType == CARDTYPE_SD) && (unit->sdu_CardVersion == 2)) 
+      {
         if (sd_command(port, CMD58,0L,0,R3,response) != 0) {  /* shouldn't happen */
             unit->sdu_CardType = CARDTYPE_UNKNOWN;
             unit->sdu_CardVersion = 0;
             return;
         }
+
         if (response[1] & 0x40)
+	  {
             unit->sdu_CardFeatures |= BLOCK_ADDRESSING;
+	  }
     }
 
     /*
@@ -547,16 +555,16 @@ int sd_reset(void* units) {
     struct TF530SDRegs* port = (struct TF530SDRegs*)unit->sdu_Registers;
 
     /* send at least 74 dummy clocks with CS unasserted (high) */
-
-    uint8 oldstate = spi_cs_unassert(port);
-
+    
+    spi_cs_unassert(port);
+    
     for (i = 0; i < 10; i++)
     {
         spi_send_byte(port, 0xff);
     }
-
-    spi_cs_assert(port, oldstate);
-
+    
+    spi_cs_assert(port);
+    
     /*
      *  if CMD0 doesn't cause a switch to idle state, there's
      *  probably no card inserted, so exit with error
@@ -567,15 +575,6 @@ int sd_reset(void* units) {
         unit->sdu_CardType = CARDTYPE_UNKNOWN;
         //spi_cs_unassert(port);
         return 1;
-    }
-
-    /* now switch into SPI Mode.. this is mandatory */
-    rc = sd_command(port, CMD8,0x1AAL,0x87,R1,response);
-    if ((rc < 0) || !(rc&SD_ERR_IDLE_STATE)) {
-        printf("CMD8 failed, rc=%d, response=0x%02x\n",rc,response[0]);
-        unit->sdu_CardType = CARDTYPE_UNKNOWN;
-        //spi_cs_unassert(port);
-        return 2;
     }
 
     /*
@@ -592,8 +591,7 @@ int sd_reset(void* units) {
             if (sd_command(port, CMD16,SECTOR_SIZE,0,R1,response) != 0)
                 unit->sdu_CardType = CARDTYPE_UNKNOWN;
 
-    printf("Card info: type %d, version %d, features 0x%02x\n",
-           unit->sdu_CardType,unit->sdu_CardVersion,unit->sdu_CardFeatures);
+    //printf("Card info: type %d, version %d, features 0x%02x\n", unit->sdu_CardType,unit->sdu_CardVersion,unit->sdu_CardFeatures);
 
     return 0;
 }
@@ -613,6 +611,7 @@ uint32 pattern;
         pattern |= (uint32)spi_recv_byte(port) << 16;
         pattern |= (uint32)spi_recv_byte(port) << 8;
         pattern |= (uint32)spi_recv_byte(port);
+
 
         /* the first 3 bits are undefined */
         pattern |= 0xe0000000L;             /* first 3 bits are undefined */
@@ -644,14 +643,17 @@ uint8 rtoken;
     } else {
         /* send the data */
         for (i = 0; i < len; i++)
+        {
 	  spi_send_byte(port, *buf++);
+        }
+        
         spi_send_byte(port, 0xff);        /* send dummy crc */
         spi_send_byte(port, 0xff);
 
         /* check the data response token */
         rtoken = sd_get_dataresponse(port);
         if ((rtoken & DATARESPONSE_TOKEN_MASK) != 0x05) {
-	  //KDEBUG(("sd_send_data() response token 0x%02x\n",rtoken));
+            printf("Failed: sd_send_data() response token 0x%02x\n",rtoken);
             return -1;
         }
     }
