@@ -19,7 +19,7 @@ Everything in this repository is released under the GNU GPLv2. You may create or
 
 This project and all the files contained are released under the GNU GPLv2. If you build a modified version of the board you must supply the end user with all the sources (this can be a web link).
 
-## The TerribleFore 530 board (Revision 3)
+## The TerribleFire 530 board (Revision 3)
 
 Completely untested board link.... use with caution!!!! Do not come crying to me if it didnt work!!
 
